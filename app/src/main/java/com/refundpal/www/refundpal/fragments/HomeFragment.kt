@@ -39,17 +39,21 @@ class HomeFragment : BaseMainFragment() {
     // View is non-null in onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val setupText: String
+        val isDone: String? = userSessionManager.getUser().attributes.get("done")
+        if (isDone != null) {
+            setupText = getString(R.string.review_my_saving_profile)
+        } else {
+            setupText = getString(R.string.prepare_for_my_refund)
+        }
+
+        questionButton.text = setupText
         questionButton.setOnClickListener {
             Toast.makeText(activity, "Let's start your Refund Journey!", Toast.LENGTH_SHORT).show()
-            val setupText: String
-            val isDone: String? = userSessionManager.getUser().attributes.get("done")
-            if (isDone != null) {
-                setupText = getString(R.string.review_my_saving_profile)
-            } else {
-                setupText = getString(R.string.prepare_for_my_refund)
-            }
             loadQuestionFragment(1, setupText)
         }
+
+
 
         reportButton.setOnClickListener {
             loadFragmentIntoMain(ReportFragment(), getString(R.string.view_tax_saving_report))
