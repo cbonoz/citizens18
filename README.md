@@ -1,8 +1,8 @@
 <p align="center">
-    <img src="screenshots/refund_pal_170.png"/>
+    <img src="screenshots/props_170.png"/>
 </p>
 
-RefundPal Mobile App
+Props Mobile App
 ====================
 
 

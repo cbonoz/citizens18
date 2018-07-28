@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.refundpal.www.refundpal">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:name=".RefundApplication"
         android:allowBackup="true"
-        android:icon="@drawable/refund_pal_170"
+        android:icon="@drawable/props_170"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/refund_pal_170"
+        android:roundIcon="@drawable/props_170"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.SplashActivity">
@@ -18,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.LoginActivity" />
     </application>
 
 </manifest>

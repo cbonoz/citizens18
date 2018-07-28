@@ -36,8 +36,8 @@ class RefundModule(private val mApplication: RefundApplication) {
 
     @Provides
     @Singleton
-    internal fun providesRefundService(prefManager: PrefManager): RefundService {
-        return RefundService(prefManager)
+    internal fun providesRefundService(prefManager: PrefManager, refundApplication: RefundApplication): RefundService {
+        return RefundService(prefManager, refundApplication)
     }
 
     @Provides

@@ -16,15 +16,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="40dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/refund_pal_170" />
+            android:src="@drawable/props_170" />
 
         <Button
             android:id="@+id/questionButton"
             style="@style/home_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/prepare_for_my_refund" />
 
@@ -32,8 +30,6 @@
         <Button
             android:id="@+id/reportButton"
             style="@style/home_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/view_tax_saving_report" />
 
@@ -41,8 +37,6 @@
         <Button
             android:id="@+id/profileButton"
             style="@style/home_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/view_my_profile" />
 

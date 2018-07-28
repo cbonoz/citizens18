@@ -12,7 +12,7 @@ import java.util.*
 class UserSessionManager(private val prefManager: PrefManager, private val gson: Gson) {
 
     // TODO: replace with auth (deviceId ok for demo uniqueness for now, each device will be unique user).
-    fun setLoggedInUser(user: User) {
+    fun saveUser(user: User) {
         prefManager.saveJson(USER_ID_LOCATION, user)
     }
 
@@ -21,7 +21,7 @@ class UserSessionManager(private val prefManager: PrefManager, private val gson:
         return !userString.isNullOrBlank()
     }
 
-    fun getLoggedInUser(): User {
+    fun getUser(): User {
         val user = prefManager.getJson(USER_ID_LOCATION, User::class.java, User(""))
         if (user.name.isBlank()) {
             logout()

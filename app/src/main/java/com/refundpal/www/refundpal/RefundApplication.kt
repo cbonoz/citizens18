@@ -21,12 +21,10 @@ class RefundApplication : Application() {
 
     companion object {
 
-        val CAFE_SEARCH_STRING = "cafe"
+        val USER_LOC = "user_location"
 
-        val LAST_LOCATION_LOC = "last_location"
-
-        val CAFE_DATA = "cafe_data"
-        val CONVERSATION_DATA = "conv_data"
+        val QUESTION_DATA = "question_data"
+        val QUESTION_INDEX = "question_index"
 
         val MY_PERMISSIONS_ACCESS_FINE_LOCATION = 100
         var app: RefundApplication? = null

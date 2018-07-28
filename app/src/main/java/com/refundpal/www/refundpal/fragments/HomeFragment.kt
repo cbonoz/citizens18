@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.refundpal.www.refundpal.R
+import com.refundpal.www.refundpal.RefundApplication
+import com.refundpal.www.refundpal.util.UserSessionManager
 import kotlinx.android.synthetic.main.fragment_home.*
+import javax.inject.Inject
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,11 +25,14 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : BaseMainFragment() {
 
+   @Inject
+   lateinit var userSessionManager: UserSessionManager
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_home, container, false)
-
+        RefundApplication.injectionComponent.inject(this)
         return v
     }
 
@@ -35,15 +41,22 @@ class HomeFragment : BaseMainFragment() {
         super.onViewCreated(view, savedInstanceState)
         questionButton.setOnClickListener {
             Toast.makeText(activity, "Let's start your Refund Journey!", Toast.LENGTH_SHORT).show()
-            loadMainFragment(QuestionFragment(), getString(R.string.prepare_for_my_refund))
+            val setupText: String
+            val isDone: String? = userSessionManager.getUser().attributes.get("done")
+            if (isDone != null) {
+                setupText = getString(R.string.review_my_saving_profile)
+            } else {
+                setupText = getString(R.string.prepare_for_my_refund)
+            }
+            loadQuestionFragment(1, setupText)
         }
 
         reportButton.setOnClickListener {
-            loadMainFragment(ReportFragment(), getString(R.string.view_tax_saving_report))
+            loadFragmentIntoMain(ReportFragment(), getString(R.string.view_tax_saving_report))
         }
 
         profileButton.setOnClickListener {
-            loadMainFragment(ProfileFragment(), getString(R.string.view_my_profile))
+            loadFragmentIntoMain(ProfileFragment(), getString(R.string.view_my_profile))
         }
     }
 

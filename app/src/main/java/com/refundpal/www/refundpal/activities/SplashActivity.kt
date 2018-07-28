@@ -15,9 +15,9 @@ import com.refundpal.www.refundpal.util.UserSessionManager
 import javax.inject.Inject
 import com.afollestad.materialdialogs.MaterialDialog
 import android.text.InputType
+import android.util.Log
 import android.widget.Toast
 import com.refundpal.www.refundpal.models.User
-import java.util.*
 
 
 /**
@@ -53,7 +53,7 @@ class SplashActivity : AwesomeSplash() {
         //Choose LOGO OR PATH; if you don't provide String value for path it's logo by default
 
         //Customize Logo
-        configSplash.logoSplash = R.drawable.refund_pal_170
+        configSplash.logoSplash = R.drawable.props_170
         configSplash.animLogoSplashDuration = duration //int ms
         configSplash.animLogoSplashTechnique = Techniques.FadeIn //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
@@ -68,37 +68,16 @@ class SplashActivity : AwesomeSplash() {
 
     override fun animationsFinished() {
         // Transit to another activity here or perform other actions.
+        val intent: Intent
         if (userSessionManager.hasLoggedInUser()) {
-            proceed()
-            return
+             intent = Intent(this, MainActivity::class.java)
+        } else {
+            intent =  Intent(this, LoginActivity::class.java)
         }
-
-        MaterialDialog.Builder(this)
-                .title("Enter Username")
-                .content("Enter your user name for the RefundLink app - note you can only set this once for the device")
-                .autoDismiss(false)
-                .canceledOnTouchOutside(false)
-                .cancelable(false)
-                .inputType(InputType.TYPE_CLASS_TEXT)
-                .input(R.string.username, R.string.input_prefill) { dialog, input ->
-                    val userName = input.toString()
-
-                    if (userName.isBlank()) {
-                        Toast.makeText(this, "Username must not be empty", Toast.LENGTH_SHORT).show()
-                    } else {
-                        userSessionManager.setLoggedInUser(User(userName))
-                        dialog.dismiss()
-                        proceed()
-                    }
-                    // Do something
-                }.show()
-    }
-
-    private fun proceed() {
-        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
+
     }
 
 }
