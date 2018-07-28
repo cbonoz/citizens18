@@ -45,8 +45,7 @@ class RefundService(private val prefManager: PrefManager, private val context: C
     val random = Random()
 
     fun generateTransaction(i: Int): String {
-        return "Cha-ching! We noticed an unusually large deposit in your account of $$i.00, this is higher than usual. " +
-                "Click here to apply your Saving Rules: ${generateUrl()}"
+        return "Cha-ching! We noticed an unusually large deposit in your account of $$i.00. We'll apply your savings rules."
     }
 
     private fun generateUrl(): String {

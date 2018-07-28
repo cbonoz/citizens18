@@ -21,6 +21,7 @@ import com.refundpal.www.refundpal.util.UserSessionManager
 import kotlinx.android.synthetic.main.fragment_profile.*
 import net.idik.lib.slimadapter.SlimAdapter
 import timber.log.Timber
+import java.lang.Float.parseFloat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -104,10 +105,12 @@ class ProfileFragment : BaseMainFragment() {
 
         transactionButton.setOnClickListener {
             val phone = getString(R.string.test_phone)
-           refundService.sendSMS(phone, refundService.generateTransaction(5000))
+            val amount = 5000
+            val multiple = parseFloat(currentUser.attributes.get("question3")?:"50".replace("%", "")) / 100
+           refundService.sendSMS(phone, refundService.generateTransaction(amount))
             handler.postDelayed( {
                 refundService.sendSMS(phone, "Accepted!")
-                refundService.sendSMS(phone, "Congrats! You're %200 closer to your ${currentUser.attributes["question1"]?:"College Saving"} goal")
+                refundService.sendSMS(phone, "Congrats! You're ${multiple * amount} closer to your ${currentUser.attributes["question1"]?:"College Saving"} goal")
             }, 10000)
         }
 
