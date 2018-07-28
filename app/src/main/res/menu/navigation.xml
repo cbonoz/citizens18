@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_explore"
+        android:icon="@drawable/zzz_map"
+        android:title="@string/title_explore" />
+
+    <item
+        android:id="@+id/navigation_recent"
+        android:icon="@drawable/zzz_notification_clear_all"
+        android:title="@string/title_recent" />
+
+    <item
+        android:id="@+id/navigation_messages"
+        android:icon="@drawable/zzz_message"
+        android:title="@string/title_messages" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/zzz_face_profile"
+        android:title="@string/title_profile" />
+
+</menu>

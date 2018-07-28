@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">RefundPal</string>
+    <string name="slogan">Your Tax Refund Assistant</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="title_settings">Settings</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_messages">Messages</string>
+    <string name="back">Back</string>
+    <string name="input_prefill"></string>
+    <string name="saving">Saving…</string>
+    <string name="app_info">RefundPal is the new way of staying true to your tax refund spending goals.</string>
+    <string name="username">Username..</string>
+    <string name="title_recent">Recent</string>
+    <string name="title_explore">explore</string>
+    <string name="welcome">Welcome to Citizen\'s Bank RefundPal</string>
+    <string name="prepare_for_my_refund">Prepare for my Refund</string>
+    <string name="view_tax_saving_report">View Tax Saving Report</string>
+    <string name="view_my_profile">View my Profile</string>
+
+    <string-array name="question1">
+        <item>What are your goals for your Tax Refund?</item>
+    </string-array>
+
+    <string-array name="question2">
+        <item>What are you saving for?</item>
+        <item>Emergency Fund</item>
+        <item>Back to school shopping</item>
+        <item>College Savings</item>
+        <item>Vacation Fund</item>
+    </string-array>
+
+
+    <string-array name="question3">
+        <item>Do you want to commit part of your tax refund to saving for %s?</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="question4">
+        <item>Great, how much?</item>
+        <item>10%%</item>
+        <item>25%%</item>
+        <item>50%%</item>
+        <item>Choose a different amount</item>
+    </string-array>
+
+    <string-array name="question5">
+        <item>Congrats! Setting a goal is the first step torwards financial security. We'll let you know when your refund arrives</item>
+        <item>OK</item>
+    </string-array>
+
+    <string-array name="question6">
+        <item>Do you want to hear from us about other opportunities to save for your %s fund?</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+
+    <!--POST REFUND BELOW-->
+
+    <string-array name="refund1">
+        <item>You just got a federal tax refund of %f. In Junary, you committed to saving %d%% of your refund for your vacation. That's %f.</item>
+        <item>Confirm %f to save</item>
+        <item>Confirm another amount</item>
+    </string-array>
+
+    <string-array name="refund2">
+        <item>In the meantime, text 'SAVE' anytime to %s to make an additional deposit toward your %s fund</item>
+        <item>Click here to check your savings balance</item>
+        <item>Click here to exit</item>
+    </string-array>
+</resources>
