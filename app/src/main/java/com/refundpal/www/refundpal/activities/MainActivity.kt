@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_main)
-        replaceFragment(HomeFragment(), getString(R.string.title_explore))
+        replaceFragment(HomeFragment(), getString(R.string.app_name))
     }
 
     fun replaceFragment(fragment: Fragment, fragmentTitle: String) {

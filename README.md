@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="screenshots/refund_pal_170.png"/>
+</p>
+
 RefundPal Mobile App
 ====================
 
@@ -11,8 +15,12 @@ Description
 How it works
 ----------------
 
-How we built it
+Screenshots
 --------------------
+
+<p align="center">
+    <img src="screenshots/home.png"/>
+</p>
 
 Advantages
 -------------------------
