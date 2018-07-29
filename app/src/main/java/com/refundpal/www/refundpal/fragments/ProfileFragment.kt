@@ -140,12 +140,12 @@ class ProfileFragment : BaseMainFragment() {
 
     private fun confirmDepositViaText(phone: String, amount: Float, percentage: Float, goalName: String) {
         val amountString = "$%.2f".format(amount)
-        val percentageString = "$%f".format(percentage * 100)
+        val percentageString = "$%.2f".format(percentage * 100)
         val depositString = "$%.2f".format(amount * percentage)
         val message0 = "Cha-ching! We noticed a large deposit of $amountString. You committed to saving $percentageString% toward your $goalName goal."
         val message1 = "That's $depositString. Reply 'YES' to apply this savings rule."
-        val message2 = "Accepted, Congrats! You're $depositString closer to your $goalName goal"
-        val message3 = "In the meantime, text 'SAVE' anytime to make an additional deposit toward your $goalName goal"
+        val message2 = "Congrats! You're $depositString closer to your $goalName goal"
+        val message3 = "In the meantime, text 'SAVE' to make an additional deposit toward your $goalName goal"
 
         refundService.sendSMS(phone, message0)
         refundService.sendSMS(phone, message1)
@@ -154,6 +154,6 @@ class ProfileFragment : BaseMainFragment() {
             handler.postDelayed({
                 refundService.sendSMS(phone, message3)
             }, 1000)
-        }, 10000)
+        }, 12000)
     }
 }
