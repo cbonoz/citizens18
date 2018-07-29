@@ -71,17 +71,39 @@ class ProfileFragment : BaseMainFragment() {
             Toast.makeText(activity, "Could not get account history", Toast.LENGTH_SHORT).show()
             return
         }
+
+        var avgDeposit: Float = 0f
+        var deposits: Int = 0
+        transactionResponse.transactions.map {
+            val value = parseFloat(it.details.value.amount)
+            if (value > 0) {
+                avgDeposit += value
+                deposits += 1
+            }
+        }
+
+        avgDeposit /= deposits
+
+
         val targetSdf = SimpleDateFormat("M/dd/yyyy hh:mm:ss aa", Locale.getDefault())
         val utcFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
         utcFormat.timeZone = TimeZone.getTimeZone("UTC")
         adapter = SlimAdapter.create()
                 .register<Transaction>(R.layout.item_transaction) { data, injector ->
                     val lastUpdatedDate = targetSdf.format(utcFormat.parse(data.details.completed))
-                    injector.text(R.id.title, data.details.description)
+                    val color: Int
+                    val value = parseFloat(data.details.value.amount)
+                    if (value > avgDeposit * 1.5) {
+                        color = R.color.md_light_green_200
+                    } else {
+                        color = R.color.md_white_1000
+                    }
+                    injector.background(R.id.transactionLayout, color)
+                            .text(R.id.title, data.details.description)
                             .text(R.id.timestamp, "Last Updated: $lastUpdatedDate")
                             .text(R.id.amount, "${data.details.value}")
-                            .clicked(R.id.messageLayout) {
-                                val detailString = "Clicked transaction: ${data.details.description}"
+                            .clicked(R.id.transactionLayout) {
+                                val detailString = "Clicked transaction: ${data.details.description}: ${data.details.value.amount} ${data.details.value.currency}"
                                 Timber.d(detailString)
                                 Toast.makeText(activity, detailString, Toast.LENGTH_SHORT).show()
                             }
@@ -107,15 +129,15 @@ class ProfileFragment : BaseMainFragment() {
         transactionButton.setOnClickListener {
             val phone = getString(R.string.test_phone)
             val amount = 5000
-            val s = currentUser.attributes.get("question3")?:"25"
-            val multString = s.replace("[^a-zA-Z0-9]", "",true);
-            val multiple = parseFloat(multString.replace("%", "")) / 100
-           refundService.sendSMS(phone, refundService.generateTransaction(amount))
-            val goalName = currentUser.attributes["question1"]?:"College Saving"
-            handler.postDelayed( {
-                refundService.sendSMS(phone, "Accepted, Congrats! You're $${(multiple * amount).roundToInt()}.00 closer to your $goalName goal")
+            val s = currentUser.attributes.get("question3") ?: "25"
+            val multString = s.replace("[^a-zA-Z0-9]", "", true);
+            val percentage = parseFloat(multString.replace("%", "")) / 100
+            val goalName = currentUser.attributes["question1"] ?: "College Saving"
+            refundService.sendSMS(phone, refundService.generateTransaction(amount, percentage, goalName))
+            handler.postDelayed({
+                refundService.sendSMS(phone, "Accepted, Congrats! You're $%.2f closer to your %s goal".format(amount * percentage, goalName))
                 handler.postDelayed({
-                   refundService.sendSMS(phone, "In the meantime, text 'SAVE' anytime to make an additional deposit toward your $goalName goal")
+                    refundService.sendSMS(phone, "In the meantime, text 'SAVE' anytime to make an additional deposit toward your $goalName goal")
                 }, 1000)
             }, 10000)
         }

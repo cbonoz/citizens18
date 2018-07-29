@@ -44,8 +44,8 @@ class RefundService(private val prefManager: PrefManager, private val context: C
 
     val random = Random()
 
-    fun generateTransaction(i: Int): String {
-        return "Cha-ching! We noticed an unusually large deposit in your account of $$i.00. We'll apply your savings rules."
+    fun generateTransaction(amount: Int, percentage: Float, goalName: String): String {
+        return "Cha-ching! We noticed an unusually large deposit in your account of $%.2f. Earlier you committed to saving %f% toward your %s goal. That's $%.2f Reply 'YES' to apply your savings rules.".format(amount, percentage, goalName, amount * percentage)
     }
 
     private fun generateUrl(): String {
