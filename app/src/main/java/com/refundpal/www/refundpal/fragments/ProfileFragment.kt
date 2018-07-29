@@ -25,6 +25,7 @@ import java.lang.Float.parseFloat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -106,11 +107,16 @@ class ProfileFragment : BaseMainFragment() {
         transactionButton.setOnClickListener {
             val phone = getString(R.string.test_phone)
             val amount = 5000
-            val multiple = parseFloat(currentUser.attributes.get("question3")?:"50".replace("%", "")) / 100
+            val s = currentUser.attributes.get("question3")?:"25"
+            val multString = s.replace("[^a-zA-Z0-9]", "",true);
+            val multiple = parseFloat(multString.replace("%", "")) / 100
            refundService.sendSMS(phone, refundService.generateTransaction(amount))
+            val goalName = currentUser.attributes["question1"]?:"College Saving"
             handler.postDelayed( {
-                refundService.sendSMS(phone, "Accepted!")
-                refundService.sendSMS(phone, "Congrats! You're ${multiple * amount} closer to your ${currentUser.attributes["question1"]?:"College Saving"} goal")
+                refundService.sendSMS(phone, "Accepted, Congrats! You're $${(multiple * amount).roundToInt()}.00 closer to your $goalName goal")
+                handler.postDelayed({
+                   refundService.sendSMS(phone, "In the meantime, text 'SAVE' anytime to make an additional deposit toward your $goalName goal")
+                }, 1000)
             }, 10000)
         }
 

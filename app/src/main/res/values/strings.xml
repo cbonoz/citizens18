@@ -39,7 +39,7 @@
     <string name="your_profile">Your Profile</string>
     <string name="your_finances">Your Finances</string>
     <string name="spending_plan">Your Refund Plan</string>
-    <string name="test_phone">+5109266842</string>
+    <string name="test_phone">5109266842</string>
 
     <string-array name="question1">
         <item>What are your goals for your Tax Refund and/or future windfalls?</item>
