@@ -76,7 +76,7 @@ class QuestionFragment : BaseMainFragment() {
 
         val q = currentQuestion!!.question
                 .replace("%q1", user.attributes["question1"] ?: "College Saving", true)
-                .replace("%q3", user.attributes["question3"] ?: "10%", true)
+                .replace("%q3", user.attributes["question2"] ?: "10%", true)
         questionText.text = q
 
         currentQuestion!!.answers.map {

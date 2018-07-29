@@ -42,22 +42,15 @@
     <string name="test_phone">5109266842</string>
 
     <string-array name="question1">
-        <item>What are your goals for your Tax Refund and/or future windfalls?</item>
-        <item>Emergency Fund</item>
+        <item>What are you saving for?</item>
+        <item>Emergencies</item>
         <item>Back to School Shopping</item>
         <item>College Savings</item>
-        <item>Vacation Fund</item>
+        <item>Vacations</item>
         <item>Enter Custom Goal</item>
     </string-array>
 
     <string-array name="question2">
-        <item>Are you committed to saving for your <b>%q1</b> fund?</item>
-        <item>Yes, starting now</item>
-        <item>Maybe later (enter date)</item>
-        <item>No</item>
-    </string-array>
-
-    <string-array name="question3">
         <item>Great, how much?</item>
         <item>10%</item>
         <item>25%</item>
@@ -65,14 +58,14 @@
         <item>Enter a different amount</item>
     </string-array>
 
-    <string-array name="question4">
-        <item>Congrats! Setting a goal is the first step towards financial security. We will let you know when your refund arrives</item>
+    <string-array name="question3">
+        <item>Congrats! Setting a goal is the first step towards financial security. We will let you know when your refund arrives.</item>
         <item>OK</item>
         <item>Disable Alerts</item>
     </string-array>
 
-    <string-array name="question5">
-        <item>Do you want to hear from us about other opportunities to save for your <b>%q1</b> fund? We will email these to you</item>
+    <string-array name="question4">
+        <item>Do you want to hear from us about other opportunities to save for your <b>%q1</b> fund? We will email these to you.</item>
         <item>Yes</item>
         <item>No</item>
     </string-array>

@@ -25,7 +25,6 @@ import java.lang.Float.parseFloat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -68,7 +67,8 @@ class ProfileFragment : BaseMainFragment() {
 
     fun setupTransactionList(transactionResponse: TransactionResponse?) {
         if (transactionResponse == null) {
-            Toast.makeText(activity, "Could not get account history", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Could not get account history, please login again", Toast.LENGTH_SHORT).show()
+            userSessionManager.logout()
             return
         }
 
@@ -128,19 +128,32 @@ class ProfileFragment : BaseMainFragment() {
 
         transactionButton.setOnClickListener {
             val phone = getString(R.string.test_phone)
-            val amount = 5000
-            val s = currentUser.attributes.get("question3") ?: "25"
+            val amount: Float = 5000f
+            val s = currentUser.attributes.get("question2") ?: "25"
             val multString = s.replace("[^a-zA-Z0-9]", "", true);
             val percentage = parseFloat(multString.replace("%", "")) / 100
             val goalName = currentUser.attributes["question1"] ?: "College Saving"
-            refundService.sendSMS(phone, refundService.generateTransaction(amount, percentage, goalName))
-            handler.postDelayed({
-                refundService.sendSMS(phone, "Accepted, Congrats! You're $%.2f closer to your %s goal".format(amount * percentage, goalName))
-                handler.postDelayed({
-                    refundService.sendSMS(phone, "In the meantime, text 'SAVE' anytime to make an additional deposit toward your $goalName goal")
-                }, 1000)
-            }, 10000)
+            confirmDepositViaText(phone, amount, percentage, goalName)
         }
 
+    }
+
+    private fun confirmDepositViaText(phone: String, amount: Float, percentage: Float, goalName: String) {
+        val amountString = "$%.2f".format(amount)
+        val percentageString = "$%f".format(percentage * 100)
+        val depositString = "$%.2f".format(amount * percentage)
+        val message0 = "Cha-ching! We noticed a large deposit of $amountString. You committed to saving $percentageString% toward your $goalName goal."
+        val message1 = "That's $depositString. Reply 'YES' to apply this savings rule."
+        val message2 = "Accepted, Congrats! You're $depositString closer to your $goalName goal"
+        val message3 = "In the meantime, text 'SAVE' anytime to make an additional deposit toward your $goalName goal"
+
+        refundService.sendSMS(phone, message0)
+        refundService.sendSMS(phone, message1)
+        handler.postDelayed({
+            refundService.sendSMS(phone, message2)
+            handler.postDelayed({
+                refundService.sendSMS(phone, message3)
+            }, 1000)
+        }, 10000)
     }
 }

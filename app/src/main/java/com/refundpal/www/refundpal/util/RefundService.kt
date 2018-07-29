@@ -20,8 +20,6 @@ class RefundService(private val prefManager: PrefManager, private val context: C
         questionMap.put("2", context.resources.getStringArray(R.array.question2).toList().createQuestion())
         questionMap.put("3", context.resources.getStringArray(R.array.question3).toList().createQuestion())
         questionMap.put("4", context.resources.getStringArray(R.array.question4).toList().createQuestion())
-        questionMap.put("5", context.resources.getStringArray(R.array.question5).toList().createQuestion())
-//        questionMap.put("6", context.resources.getStringArray(R.array.question6).toList().createQuestion())
     }
 
     fun getQuestion(index: Int): Question? {
@@ -42,15 +40,8 @@ class RefundService(private val prefManager: PrefManager, private val context: C
         return "$BASE_URL/obp/v3.1.0/my/banks/$bankId/accounts/$accountId/transactions"
     }
 
-    val random = Random()
-
-    fun generateTransaction(amount: Int, percentage: Float, goalName: String): String {
-        return "Cha-ching! We noticed an unusually large deposit in your account of $%.2f. Earlier you committed to saving %f% toward your %s goal. That's $%.2f Reply 'YES' to apply your savings rules.".format(amount, percentage, goalName, amount * percentage)
-    }
-
     private fun generateUrl(): String {
         return "https://ctzn.ly/login.jsp?ref=${UUID.randomUUID()}"
-
     }
 
     companion object {

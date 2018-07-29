@@ -29,7 +29,7 @@ class UserSessionManager(private val prefManager: PrefManager, private val gson:
         return user
     }
 
-    private fun logout() {
+    fun logout() {
         prefManager.clear(USER_ID_LOCATION)
         Toast.makeText(app, "Session Expired, please reregister", Toast.LENGTH_LONG).show()
         val intent = Intent(app, SplashActivity::class.java)
